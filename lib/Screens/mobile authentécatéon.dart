@@ -9,15 +9,16 @@ import '../widgets/Textformfield.dart';
 import 'otp screen.dart';
 
 class Mobile_auth extends StatefulWidget {
-  const Mobile_auth({super.key});
+  const Mobile_auth({Key? key});
 
   @override
   State<Mobile_auth> createState() => _Mobile_authState();
 }
 
 class _Mobile_authState extends State<Mobile_auth> {
-  TextEditingController phoneController = TextEditingController();
   TextEditingController _phoneNumberController = TextEditingController();
+
+  String _verificationId = '';
 
   @override
   Widget build(BuildContext context) {
@@ -109,20 +110,7 @@ class _Mobile_authState extends State<Mobile_auth> {
 
             InkWell(
               onTap: () async {
-                await FirebaseAuth.instance.verifyPhoneNumber(
-                    verificationCompleted: (PhoneAuthCredential credential) {},
-                    verificationFailed: (FirebaseAuthException ex) {},
-                    codeSent: (String verificationId, int? resendtoken) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Otpscreen(
-                              verificationid: verificationId,
-                            ),
-                          ));
-                    },
-                    codeAutoRetrievalTimeout: (String verificationId) {},
-                    phoneNumber: '+91' + _phoneNumberController.text);
+                await _verifyPhoneNumber('+91${_phoneNumberController.text}');
               },
               child: MyContainer(
                 hight: 50,
@@ -138,5 +126,42 @@ class _Mobile_authState extends State<Mobile_auth> {
         ),
       ),
     );
+  }
+
+  Future<void> _verifyPhoneNumber(String phoneNumber) async {
+    FirebaseAuth _auth = FirebaseAuth.instance;
+    try {
+      await _auth.verifyPhoneNumber(
+        phoneNumber: phoneNumber,
+        verificationCompleted: (PhoneAuthCredential credential) {},
+        verificationFailed: (FirebaseAuthException error) {
+          // Handle verification failed
+          print("Verification Failed: ${error.message}");
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text("Verification Failed: ${error.message}"),
+          ));
+        },
+        codeSent: (String verificationId, int? resendToken) {
+          // Navigate to OTP screen
+          setState(() {
+            _verificationId = verificationId;
+          });
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Otpscreen(
+                verificationid: _verificationId,
+              ),
+            ),
+          );
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {},
+      );
+    } catch (e) {
+      print("Failed to verify phone number: $e");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Failed to verify phone number: $e"),
+      ));
+    }
   }
 }
