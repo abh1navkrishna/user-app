@@ -105,7 +105,7 @@ class _Home_SreenState extends State<Home_Sreen> {
             }
 
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Text("Loading");
+              return Center(child: CircularProgressIndicator());
             }
 
             var users = snapshot.data!.docs;
@@ -185,7 +185,9 @@ class _Home_SreenState extends State<Home_Sreen> {
                   textcolor: black,
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                   child: Row(
                     children: [
                       IconButton(
@@ -206,6 +208,7 @@ class _Home_SreenState extends State<Home_Sreen> {
                     setState(() {
                       sortByAgeAscending = !sortByAgeAscending;
                     });
+                    Navigator.pop(context);
                   },
                   child: Row(
                     children: [
@@ -227,6 +230,7 @@ class _Home_SreenState extends State<Home_Sreen> {
                     setState(() {
                       sortByAgeAscending = !sortByAgeAscending;
                     });
+                    Navigator.pop(context);
                   },
                   child: Row(
                     children: [
