@@ -52,7 +52,7 @@ class _Mobile_authState extends State<Mobile_auth> {
             AppTextForm(
                 vertical: 10,
                 horizontal: 15,
-                hintText: "Enter Phone Number",
+                hintText: "Enter Phone Number*",
                 weight: FontWeight.w400,
                 size: 16,
                 textcolor: Colors.grey,
@@ -72,7 +72,7 @@ class _Mobile_authState extends State<Mobile_auth> {
                 children: [
                   TextSpan(
                     text:
-                    "By Continuing, I agree to TotalX's", // First part of text
+                        "By Continuing, I agree to TotalX's", // First part of text
                     style: GoogleFonts.inter(
                         fontWeight: FontWeight.w500,
                         color: black,

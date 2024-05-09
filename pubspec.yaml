@@ -42,8 +42,9 @@ dependencies:
   flutter_screenutil: ^5.9.0
   firebase_auth: any
   pinput: ^3.0.1
-#  image_picker: any
-  #  firebase_storage: any
+  firebase_storage: any
+  flutter_plugin_android_lifecycle: ^2.0.0
+  image_picker: ^0.8.1+4
   provider: ^6.1.2
 
 dev_dependencies:

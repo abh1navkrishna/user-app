@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_machine_test/Constant/Colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:machine_text/widgets/Apptext.dart';
 
-import '../Constant/Colors.dart';
+import '../widgets/Apptext.dart';
 import 'Add new user.dart';
 
 class Home_Sreen extends StatefulWidget {

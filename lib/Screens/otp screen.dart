@@ -4,12 +4,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_machine_test/Constant/Colors.dart';
-import 'package:flutter_machine_test/Screens/home%20page.dart';
 import 'package:flutter_machine_test/widgets/Apptext.dart';
 import 'package:flutter_machine_test/widgets/Container.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
+import 'home page.dart';
+
 
 class Otpscreen extends StatefulWidget {
   String verificationid;
@@ -140,7 +141,7 @@ class _OtpscreenState extends State<Otpscreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Home_Sreen(),
+                          builder: (context) => Homeee(),
                         ));
                   });
                 } catch (ex) {
